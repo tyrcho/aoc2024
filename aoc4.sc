@@ -1,5 +1,5 @@
 //> using jvm 21
-//> using scala 3.6.1
+//> using scala 3.5.2
 
 @scala.annotation.tailrec
 def searchWord(word: List[Char], grid: Array[String], x: Int, y: Int, dx: Int, dy: Int): Boolean =

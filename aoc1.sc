@@ -1,5 +1,5 @@
 //> using jvm 21
-//> using scala 3.6.1
+//> using scala 3.5.2
 
 
 val data = io.Source.stdin.getLines
