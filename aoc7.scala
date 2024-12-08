@@ -5,31 +5,31 @@
 def main(args: Array[String]): Unit =
     println(process2(io.Source.stdin))
 
-case class Equation(target:Long, inputs:Seq[Long]) {
+case class Equation(target:Long, inputs: Seq[Long]) {
     @annotation.tailrec
-    final def possibleValues(inputs: List[Long], acc:Set[Long]=Set.empty): Set[Long] = inputs match
+    final def possibleValues(inputs: List[Long], acc: Set[Long] = Set.empty): Set[Long] = inputs match
         case Nil => acc
         case h::t =>
             if acc.isEmpty then possibleValues(t, Set(h))
             else possibleValues(t, acc.map(h.+) ++ acc.map(h.*))
 
     @annotation.tailrec
-    final def possibleValues2(inputs: List[Long], acc:Set[Long]=Set.empty): Set[Long] = inputs match
+    final def possibleValues2(inputs: List[Long], acc: Set[Long] = Set.empty): Set[Long] = inputs match
         case Nil => acc
         case h::t =>
             if acc.isEmpty then possibleValues2(t, Set(h))
-            else possibleValues2(t, acc.map(h.+) ++ acc.map(h.*) ++ acc.map(concat(_,h)))
+            else possibleValues2(t, acc.map(h.+) ++ acc.map(h.*) ++ acc.map(concat(_, h)))
 
-    def concat(a:Long,b:Long):Long =
-        (a.toString+b.toString).toLong
+    def concat(a: Long, b: Long): Long =
+        (a.toString + b.toString).toLong
 
-    def score:Option[Long] =
+    def score: Option[Long] =
         if possibleValues(inputs.toList)(target) then
             Some(target)
         else
             None
 
-    def score2:Option[Long] =
+    def score2: Option[Long] =
         if possibleValues2(inputs.toList)(target) then
             Some(target)
         else
@@ -44,7 +44,7 @@ def process2(source: io.Source): Long =
     val equations = parse(source)
     equations.flatMap(_.score2).sum
 
-def parse(source: io.Source):Seq[Equation]=
+def parse(source: io.Source): Seq[Equation] =
     source.getLines.map(parseLine).toSeq
 
 def parseLine(line: String): Equation =
