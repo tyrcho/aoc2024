@@ -9,3 +9,6 @@ Works with [scala-cli](https://scala-cli.virtuslab.org/) :
     scala-cli test aoc4.scala
 
 When the content of the clipboard is the problem input.
+
+
+On windows `pbpaste` can be replaces by `gcb`.
